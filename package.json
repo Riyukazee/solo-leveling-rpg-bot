@@ -1,0 +1,25 @@
+{
+  "name": "solo-leveling-rpg-bot",
+  "version": "1.0.0",
+  "description": "Bot Discord RPG inspiré de Solo Leveling",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "start": "node index.js",
+    "deploy": "node deploy-commands.js",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.83.0",
+    "@vitejs/plugin-react": "^5.1.1",
+    "discord.js": "^14.25.0",
+    "dotenv": "^17.2.3",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "react-router-dom": "^7.9.6",
+    "vite": "^7.2.2"
+  }
+}
