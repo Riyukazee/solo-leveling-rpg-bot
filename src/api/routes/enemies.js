@@ -24,6 +24,7 @@ router.get("/:id", async (req, res) => {
     .maybeSingle();
 
   if (!data) return res.status(404).json({ success: false, error: "Enemy not found" });
+
   res.json({ success: true, data });
 });
 
@@ -32,6 +33,7 @@ router.get("/:id", async (req, res) => {
  */
 router.post("/", async (req, res) => {
   const { error } = await supabase.from("enemies").insert(req.body);
+
   if (error) return res.status(500).json({ success: false, error: error.message });
 
   res.json({ success: true });
@@ -43,4 +45,26 @@ router.post("/", async (req, res) => {
 router.put("/:id", async (req, res) => {
   const { error } = await supabase
     .from("enemies")
-    .update(req.b
+    .update(req.body)
+    .eq("id", req.params.id);
+
+  if (error) return res.status(500).json({ success: false, error: error.message });
+
+  res.json({ success: true });
+});
+
+/**
+ * DELETE ENEMY
+ */
+router.delete("/:id", async (req, res) => {
+  const { error } = await supabase
+    .from("enemies")
+    .delete()
+    .eq("id", req.params.id);
+
+  if (error) return res.status(500).json({ success: false, error: error.message });
+
+  res.json({ success: true });
+});
+
+module.exports = router;
