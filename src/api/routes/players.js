@@ -29,7 +29,7 @@ router.get("/:discord_id", async (req, res) => {
 });
 
 /**
- * CREATE PLAYER (rarely used)
+ * CREATE PLAYER
  */
 router.post("/", async (req, res) => {
   const { error } = await supabase.from("players").insert(req.body);
@@ -50,14 +50,22 @@ router.put("/:discord_id", async (req, res) => {
     .eq("discord_id", req.params.discord_id);
 
   if (error) return res.status(500).json({ success: false, error: error.message });
+
   res.json({ success: true });
 });
 
 /**
- * DELETE A PLAYER
+ * DELETE PLAYER
  */
 router.delete("/:discord_id", async (req, res) => {
   const { error } = await supabase
     .from("players")
     .delete()
-    .eq("discord_id", req.params.discord_id
+    .eq("discord_id", req.params.discord_id);
+
+  if (error) return res.status(500).json({ success: false, error: error.message });
+
+  res.json({ success: true });
+});
+
+module.exports = router;
