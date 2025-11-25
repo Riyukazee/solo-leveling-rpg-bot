@@ -16,7 +16,7 @@ function secure(req, res, next) {
 
 const fs = require('fs');
 const path = require('path');
-const routesPath = path.join(__dirname, 'api', 'routes');
+const routesPath = path.join(__dirname, 'src', 'api', 'routes');
 
 fs.readdirSync(routesPath).forEach(file => {
   if (file.endsWith('.js')) {
