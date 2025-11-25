@@ -43,3 +43,26 @@ router.post("/", async (req, res) => {
 router.put("/:id", async (req, res) => {
   const { error } = await supabase
     .from("inventory")
+    .update(req.body)
+    .eq("id", req.params.id);
+
+  if (error) return res.status(500).json({ success: false, error: error.message });
+
+  res.json({ success: true });
+});
+
+/**
+ * DELETE AN ITEM FROM INVENTORY
+ */
+router.delete("/:id", async (req, res) => {
+  const { error } = await supabase
+    .from("inventory")
+    .delete()
+    .eq("id", req.params.id);
+
+  if (error) return res.status(500).json({ success: false, error: error.message });
+
+  res.json({ success: true });
+});
+
+module.exports = router;
