@@ -36,3 +36,11 @@ module.exports = {
     }
   },
 };
+
+module.exports = {
+  name: 'messageCreate',
+  async execute(message) {
+    console.log("📩 Nouveau message reçu :", message.content);
+
+    if (message.author.bot) return;
+
