@@ -1,3 +1,6 @@
+console.log("🚀 src/bot.js EXECUTED !");
+console.log("🔍 INDEX.JS FROM:", __filename);
+console.log("🔍 INDEX.JS DIR:", __dirname);
 console.log("=== BOOT: index.js s'est exécuté ===");
 
 const path = require("path");
