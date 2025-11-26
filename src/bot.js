@@ -25,6 +25,8 @@ for (const folder of commandFolders) {
   const folderPath = path.join(commandsPath, folder);
   const commandFiles = fs.readdirSync(folderPath).filter(file => file.endsWith('.js'));
 
+  console.log("📁 Events trouvés :", eventFiles);
+
   for (const file of commandFiles) {
     const filePath = path.join(folderPath, file);
     const command = require(filePath);
