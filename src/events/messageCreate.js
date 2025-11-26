@@ -4,7 +4,7 @@ const { addXP } = require('../utils/experience');
 const { getOrCreatePlayer } = require('../utils/player');
 
 module.exports = {
-  name: Events.MessageCreate,
+  name: "messageCreate",
   async execute(message) {
     console.log("💬 Nouveau message :", message.content);
 
