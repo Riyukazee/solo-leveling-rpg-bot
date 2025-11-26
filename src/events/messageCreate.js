@@ -1,5 +1,6 @@
 const { supabase } = require('../config/supabase');
 const { addXP } = require('../utils/experience');
+const { getOrCreatePlayer } = require('../utils/player');
 
 module.exports = {
   name: 'messageCreate',
@@ -7,6 +8,10 @@ module.exports = {
     if (message.author.bot) return;
 
     try {
+      // 1️⃣ Création automatique du profil si inexistant
+      await getOrCreatePlayer(message.author.id, message.author.username);
+
+      // 2️⃣ Vérification config des channels XP
       const { data: config } = await supabase
         .from('config')
         .select('value')
@@ -15,13 +20,19 @@ module.exports = {
 
       if (config && config.value.allowed && config.value.allowed.length > 0) {
         if (!config.value.allowed.includes(message.channel.id)) {
-          return;
+          return; // Channel non autorisé pour l'XP
         }
       }
 
-      await addXP(message.author.id, message.author.username, message.content);
+      // 3️⃣ Ajout d'XP
+      await addXP(
+        message.author.id,
+        message.author.username,
+        message.content
+      );
+
     } catch (error) {
-      console.error('Erreur XP message:', error);
+      console.error('❌ Erreur XP / création profil :', error);
     }
   },
 };
