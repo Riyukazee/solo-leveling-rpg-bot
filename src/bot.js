@@ -1,3 +1,4 @@
+console.log("🚀 src/bot.js EXECUTED !");
 console.log("🔥 BOT LOADED FROM:", __dirname);
 
 const { Client, GatewayIntentBits, Collection } = require('discord.js');
