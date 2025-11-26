@@ -4,7 +4,6 @@ module.exports = {
     if (!interaction.isChatInputCommand()) return;
 
     const command = interaction.client.commands.get(interaction.commandName);
-
     if (!command) return;
 
     try {
@@ -17,10 +16,16 @@ module.exports = {
         ephemeral: true,
       };
 
-      if (interaction.replied || interaction.deferred) {
-        await interaction.followUp(errorMessage);
-      } else {
-        await interaction.reply(errorMessage);
+      try {
+        // Si déjà répondu → NE PAS refaire reply
+        if (interaction.deferred || interaction.replied) {
+          await interaction.followUp(errorMessage);
+        } else {
+          await interaction.reply(errorMessage);
+        }
+      } catch (err) {
+        // SÉCURITÉ MAX : si Discord refuse quand même → ignorer
+        console.error("Erreur dans le handler d'erreur:", err);
       }
     }
   },
