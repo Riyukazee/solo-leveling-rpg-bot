@@ -1,3 +1,5 @@
+console.log("=== BOOT: index.js s'est exécuté ===");
+
 require("./src/bot.js");
 
 const express = require("express");
