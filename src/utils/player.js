@@ -1,14 +1,20 @@
-const { supabase } = require('../config/supabase');
-
 async function getOrCreatePlayer(discordId, username) {
-  let { data: player } = await supabase
+  console.log("Tentative de récupération du joueur...", discordId, username);
+
+  let { data: player, error } = await supabase
     .from('players')
     .select('*')
     .eq('discord_id', discordId)
     .maybeSingle();
 
+  if (error) {
+    console.error('Erreur SELECT joueur:', error);
+  }
+
   if (!player) {
-    const { data: newPlayer } = await supabase
+    console.log('⚠️ Profil non trouvé. Création...');
+
+    const { data: newPlayer, error: insertError } = await supabase
       .from('players')
       .insert({
         discord_id: discordId,
@@ -17,11 +23,20 @@ async function getOrCreatePlayer(discordId, username) {
       .select()
       .single();
 
+    if (insertError) {
+      console.error('❌ Erreur INSERT joueur :', insertError);
+    } else {
+      console.log('✅ Nouveau profil créé :', newPlayer);
+    }
+
     player = newPlayer;
+  } else {
+    console.log('✅ Profil trouvé:', player);
   }
 
   return player;
 }
+
 
 async function updatePlayerStats(discordId, updates) {
   const { data, error } = await supabase
