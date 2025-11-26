@@ -1,3 +1,4 @@
+console.log("🔥🔥 BOT.JS A ÉTÉ EXÉCUTÉ 🔥🔥");
 console.log("🚀 src/bot.js EXECUTED !");
 console.log("🔥 BOT LOADED FROM:", __dirname);
 
