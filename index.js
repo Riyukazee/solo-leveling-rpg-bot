@@ -1,3 +1,4 @@
+console.log("🚨 INDEX.JS EST BIEN LANCÉ 🚨");
 console.log("🚀 src/bot.js EXECUTED !");
 console.log("🔍 INDEX.JS FROM:", __filename);
 console.log("🔍 INDEX.JS DIR:", __dirname);
