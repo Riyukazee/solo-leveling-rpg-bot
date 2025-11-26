@@ -1,4 +1,4 @@
-require("./src/bot");
+require("./src/bot.js");
 
 const express = require("express");
 const cors = require("cors");
