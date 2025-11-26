@@ -1,6 +1,7 @@
 console.log("=== BOOT: index.js s'est exécuté ===");
 
-require("./src/bot.js");
+const path = require("path");
+require(path.join(__dirname, "src", "bot.js"));
 
 const express = require("express");
 const cors = require("cors");
